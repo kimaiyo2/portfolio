@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f2f6fc;
+      color: #333;
+    }
+
+    header {
+      background-color: #38b6ff;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .contact-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .contact-info, .contact-form {
+      flex: 1 1 300px;
+    }
+
+    .contact-info h2, .contact-form h2 {
+      margin-bottom: 20px;
+      color: #38b6ff;
+    }
+
+    .contact-info p {
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+      resize: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: #38b6ff;
+      outline: none;
+    }
+
+    .btn {
+      background-color: #38b6ff;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #299ee0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      background-color: #f0f0f0;
+      font-size: 14px;
+      color: #666;
+    }
+
+    @media (max-width: 768px) {
+      .contact-section {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Contact Us</h1>
+    <p>We’d love to hear from you</p>
+  </header>
+
+  <div class="container">
+    <div class="contact-section">
+      <!-- Contact Info -->
+      <div class="contact-info">
+        <h2>Our Information</h2>
+        <p><strong>Address:</strong> 123 Web Lane, Nairobi, Kenya</p>
+        <p><strong>Phone:</strong> +254 712 345 678</p>
+        <p><strong>Email:</strong> info@example.com</p>
+        <p><strong>Working Hours:</strong> Mon - Fri, 9am - 5pm</p>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="contact-form">
+        <h2>Send a Message</h2>
+        <form action="#" method="POST">
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Your Email</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+          <div class="form-group">
+            <label for="message">Your Message</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Your Company Name. All rights reserved.
+  </footer>
+
+</body>
+</html>

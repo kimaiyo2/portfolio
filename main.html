@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Weather App</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #667eea, #764ba2);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 30px;
+    }
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .weather-card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      padding: 30px;
+      width: 100%;
+      max-width: 450px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      backdrop-filter: blur(10px);
+      animation: slideUp 1s ease-out;
+    }
+
+    input {
+      width: 80%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    button {
+      padding: 12px 25px;
+      background-color: #4fd1c5;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #38b2ac;
+    }
+
+    .weather-info {
+      margin-top: 30px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease;
+    }
+
+    .weather-info.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .weather-info h2 {
+      margin-bottom: 10px;
+      font-size: 26px;
+    }
+
+    .weather-info p {
+      font-size: 18px;
+      margin: 6px 0;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    @keyframes slideUp {
+      from {transform: translateY(30px); opacity: 0;}
+      to {transform: translateY(0); opacity: 1;}
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🌤️ My Weather App</h1>
+  <div class="weather-card">
+    <input type="text" id="cityInput" placeholder="Enter city..." />
+    <button onclick="getWeather()">Check Weather</button>
+
+    <div class="weather-info" id="weatherInfo">
+      <!-- Weather details will appear here -->
+    </div>
+  </div>
+
+  <script>
+    async function getWeather() {
+      const city = document.getElementById("cityInput").value.trim();
+      const apiKey = "36eb9471ac7559f3e62f9ff5b7e34525"; 
+      const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+      const weatherDiv = document.getElementById("weatherInfo");
+
+      if (!city) {
+        weatherDiv.innerHTML = `<p style="color: #fbb6ce;">Please enter a city name.</p>`;
+        weatherDiv.classList.add("show");
+        return;
+      }
+
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+        console.log(data); // For debugging
+
+        if (data.cod !== 200) {
+          weatherDiv.innerHTML = `<p style="color: #fbb6ce;">City not found. Try again.</p>`;
+          weatherDiv.classList.add("show");
+          return;
+        }
+
+        weatherDiv.innerHTML = `
+          <h2>${data.name}, ${data.sys.country}</h2>
+          <p><strong>Temperature:</strong> ${data.main.temp}°C</p>
+          <p><strong>Condition:</strong> ${data.weather[0].description}</p>
+          <p><strong>Humidity:</strong> ${data.main.humidity}%</p>
+          <p><strong>Wind Speed:</strong> ${data.wind.speed} m/s</p>
+        `;
+        weatherDiv.classList.add("show");
+      } catch (err) {
+        console.error("Fetch error:", err);
+        weatherDiv.innerHTML = `<p style="color: #fbb6ce;">Something went wrong. Please try again.</p>`;
+        weatherDiv.classList.add("show");
+      }
+    }
+  </script>
+
+</body>
+</html>
